@@ -1,1 +1,13 @@
-<p>dashboard works!</p>
+<h1>Dashboard</h1>
+<div *ngIf="profile">
+  {{profile.username}}
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="!profile" [formGroup]="formGroup">
+  <input type="text" [placeholder]="'username'" formControlName="username" />
+  <input type="password" placeholder="password" formControlName="password" />
+  <button (click)="login()">
+    Login
+  </button>
+</div>
