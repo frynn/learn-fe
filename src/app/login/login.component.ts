@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(this.formGroup.value)
-    .subscribe(()=>this.router.navigateByUrl('/dashboard'));
+    .subscribe(()=>this.router.navigateByUrl('/'));
   }
 
   ngOnInit(): void {

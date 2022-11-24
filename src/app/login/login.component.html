@@ -1,7 +1,19 @@
 <h1>Login</h1>
 <div [formGroup]="formGroup">
-    <input type="text" [placeholder]="'username'" formControlName="username" />
-    <input type="password" placeholder="password" formControlName="password" />
+  <mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" [placeholder]="'username'" formControlName="username" />
+    <mat-error *ngIf="formGroup.controls['username'].invalid">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+    <input matInput type="password" placeholder="password" formControlName="password" />
+    <mat-error *ngIf="formGroup.controls['password'].invalid">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
     <button (click)="login()">
       Login
     </button>

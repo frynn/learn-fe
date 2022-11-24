@@ -3,4 +3,9 @@
   {{profile.username}}
   <button (click)="logout()">Logout</button>
 </div>
+<div *ngIf="!profile">
+  <a routerLink="/login">
+  <button >Login</button>
+  </a>
+</div>
 
