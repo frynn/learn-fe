@@ -10,15 +10,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
+  showPassword: boolean;
 
   constructor(private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private router:Router,
   ) { 
+    this.showPassword = false;
     this.formGroup = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  togglePasswordVisibility(){
+    this.showPassword = !this.showPassword;
   }
 
   login() {
