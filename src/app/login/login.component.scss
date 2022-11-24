@@ -1,0 +1,34 @@
+.Login-container, .Login-background{
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.Login-background{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-Input{
+    width: 250px;
+}
+
+.mat-Button{
+    width: 100px;
+}
+
+.mat-Input, .mat-Button{
+    margin: auto;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+.mat-button.mat-custom{
+    color: #ffffff;
+    background-color: #555555;
+}
+
+.mat-button.mat-custom:hover{
+    background-color: #414141;
+}
