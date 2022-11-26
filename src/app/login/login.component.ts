@@ -29,7 +29,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.formGroup.value)
-    .subscribe(()=>this.router.navigateByUrl('/'));
+    .subscribe({
+      next: ()=>this.router.navigateByUrl('/'),
+      error: (err) => console.error(err)
+  });
   }
 
   ngOnInit(): void {
