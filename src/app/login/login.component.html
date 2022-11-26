@@ -1,10 +1,10 @@
 <div class="Login-background">
   <div [formGroup]="formGroup" class="Login-container">
-    <h1><b>Login</b></h1>
+    <h1><strong>Login</strong></h1>
 
     <mat-form-field class="mat-Input">
       <mat-label>Username</mat-label>
-      <input matInput type="text" [placeholder]="'username'" formControlName="username" />
+      <input matInput type="text" placeholder="username" formControlName="username" />
       <mat-error *ngIf="formGroup.controls['username'].invalid">
         Username is <strong>required</strong>
       </mat-error>
@@ -13,7 +13,9 @@
     <mat-form-field class="mat-Input">
       <mat-label>Password</mat-label>
       <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="password" formControlName="password" />
-      <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon matSuffix (click)="togglePasswordVisibility()">
+        {{showPassword ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
       <mat-error *ngIf="formGroup.controls['password'].invalid">
         Password is <strong>required</strong>
       </mat-error>

@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private readonly authService: AuthService,
-    private router:Router,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -21,7 +21,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getProfile(){
-    this.authService.getProfile().subscribe((profile) => this.profile = profile);
+    this.authService.getProfile()
+    .subscribe((profile) => this.profile = profile);
   }
 
   logout() {

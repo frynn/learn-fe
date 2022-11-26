@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private router:Router,
+    private router: Router,
   ) { 
     this.showPassword = false;
     this.formGroup = this.fb.group({
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.formGroup.invalid) {
-      console.log('invalid >>');
       return;
     }
     this.authService.login(this.formGroup.value)
