@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +12,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private readonly authService: AuthService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -22,13 +20,14 @@ export class DashboardComponent implements OnInit {
 
   getProfile(){
     this.authService.getProfile()
-    .subscribe((profile) => this.profile = profile);
+    .subscribe({
+      next: (profile) => this.profile = profile,
+      error: (err) => console.error(err)
+    });
   }
 
   logout() {
     this.profile = null;
     this.authService.logout();
-    this.router.navigateByUrl('/login');
   }
-
 }

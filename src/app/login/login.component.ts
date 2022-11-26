@@ -28,9 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.formGroup.invalid) {
-      return;
-    }
     this.authService.login(this.formGroup.value)
     .subscribe(()=>this.router.navigateByUrl('/'));
   }

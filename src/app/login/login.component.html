@@ -21,7 +21,7 @@
       </mat-error>
     </mat-form-field>
 
-      <button mat-button class="mat-Button" color="custom" (click)="login()">
+      <button mat-button class="mat-Button" color="custom" [disabled]="formGroup.invalid" (click)="login()">
         Login
       </button>
     </div>

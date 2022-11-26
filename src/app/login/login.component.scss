@@ -39,3 +39,7 @@
 .mat-button.mat-custom:hover{
     background-color: #414141;
 }
+
+.mat-button.mat-custom:disabled{
+    background-color: #949494;
+}
