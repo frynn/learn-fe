@@ -21,17 +21,16 @@ export class AuthService {
   profile: IUser | null = null;
   access_token = '';
 
-  constructor(
-    private readonly http: HttpClient,
-  ) {
-  }
+  constructor(private readonly http: HttpClient) {}
 
   login(payload: ILoginPayload): Observable<ILoginDTO> {
-    return this.http.post<ILoginDTO>(`${environment.apiUrl}/auth/login`, payload).pipe(
-      tap((response) => {
-        this.access_token = response.access_token;
-      })
-    );
+    return this.http
+      .post<ILoginDTO>(`${environment.apiUrl}/auth/login`, payload)
+      .pipe(
+        tap((response) => {
+          this.access_token = response.access_token;
+        })
+      );
   }
 
   logout() {
@@ -39,14 +38,10 @@ export class AuthService {
     this.profile = null;
   }
 
-  getProfile(): Observable<IUser | null>{
+  getProfile(): Observable<IUser | null> {
     if (!this.access_token) {
       return of(null);
     }
-    return this.http.get<IUser>(`${environment.apiUrl}/profile`, {
-      headers: {
-        'Authorization': `Bearer ${this.access_token}`,
-      }
-    });
+    return this.http.get<IUser>(`${environment.apiUrl}/profile`);
   }
 }
