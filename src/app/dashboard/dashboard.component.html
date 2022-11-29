@@ -1,7 +1,7 @@
 <body>
-<mat-toolbar >
+<mat-toolbar color="primary">
 
-  <span><h2><a href="https://qna.habr.com/q/454801">My Dashboard</a></h2></span>
+  <span><h2>My Dashboard</h2></span>
   <span class="example-spacer"></span>
 
   <div *ngIf="profile">
@@ -10,19 +10,20 @@
     </button>
   </div>
 
-  <div *ngIf="!profile" [formGroup]="formGroup">
-    <h2>Войдите в аккаунт</h2>
+  <div *ngIf="!profile" >
+    <a routerLink="/login">
+      <button class="dashbordbuttom">  <h2>Войдите в аккаунт</h2></button>
+    </a>
   </div>
 
-
-    <button mat-icon-button  [matMenuTriggerFor]="menu" class="example-icon person-icon" class="dashbordbuttom" aria-label="Example icon-button with heart icon">
-      <mat-icon>more_vert</mat-icon>
+  <button mat-icon-button  [matMenuTriggerFor]="menu" class="example-icon person-icon" class="dashbordbuttom" aria-label="Example icon-button with heart icon">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <span>What-to</span>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <span>What-to</span>
-      </button>
-    </mat-menu>
+  </mat-menu>
 </mat-toolbar>
 
 <p>  </p>
@@ -30,21 +31,14 @@
   <div class="fleft"></div>
   <div class="fcenter">
     <h1 aligan="center">Dashboard</h1>
+
     <div *ngIf="profile">
       {{profile.username}}
       <button (click)="logout()">Logout</button>
     </div>
-
-    <div *ngIf="!profile" [formGroup]="formGroup">
-      <input type="text" [placeholder]="'username'" formControlName="username" />
-      <input type="password" placeholder="password" formControlName="password" />
-      <button (click)="login()">
-        Login
-      </button>
-    </div>
-
   </div>
 
+  <div class="fright"></div>
   <div style="clear: both;"></div>
 </div>
 

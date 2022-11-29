@@ -6,6 +6,7 @@ import { AuthService } from '../shared/services/auth.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+
 })
 export class DashboardComponent implements OnInit {
   profile: IUser | null = null;
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  logout() {
+logout() {
     this.profile = null;
     this.authService.logout();
   }
