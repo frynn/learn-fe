@@ -15,8 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent,
-    LoginComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,7 +25,7 @@ import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     {

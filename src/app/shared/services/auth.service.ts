@@ -39,9 +39,6 @@ export class AuthService {
   }
 
   getProfile(): Observable<IUser | null> {
-    if (!this.access_token) {
-      return of(null);
-    }
     return this.http.get<IUser>(`${environment.apiUrl}/profile`);
   }
 }
