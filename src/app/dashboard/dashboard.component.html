@@ -1,46 +1,52 @@
 <body>
-<mat-toolbar color="primary">
-
-  <span><h2>My Dashboard</h2></span>
-  <span class="example-spacer"></span>
-
-  <div *ngIf="profile">
-    <button mat-icon-button class="example-icon person-icon" class="dashboard-button" aria-label="Example icon-button with heart icon">
-      <mat-icon>person</mat-icon>
-    </button>
-  </div>
-
-  <div *ngIf="!profile" >
-    <a routerLink="/login">
-      <button class="dashboard-button">  <h2>Войдите в аккаунт</h2></button>
-    </a>
-  </div>
-
-  <button mat-icon-button  [matMenuTriggerFor]="menu" class="example-icon person-icon" class="dashboard-button" aria-label="Example icon-button with heart icon">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <span>What-to</span>
-    </button>
-  </mat-menu>
-</mat-toolbar>
-
-<p>  </p>
-<div class="wrap">
-  <div class="fleft"></div>
-  <div class="fcenter">
-    <h1 aligan="center">Dashboard</h1>
+  <mat-toolbar color="primary">
+    <span><h2>My Dashboard</h2></span>
+    <span class="example-spacer"></span>
 
     <div *ngIf="profile">
-      {{profile.username}}
-      <button (click)="logout()" >Logout</button>
+      <button
+        mat-icon-button
+        class="example-icon person-icon dashboard-button"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
     </div>
+
+    <div *ngIf="!profile">
+      <a routerLink="/login">
+        <button class="dashboard-button"><h2>Войдите в аккаунт</h2></button>
+      </a>
+    </div>
+
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="example-icon person-icon dashboard-button"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>What-to</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <p></p>
+  <div class="wrap">
+    <div class="fleft"></div>
+    <div class="fcenter">
+      <h1 aligan="center">Dashboard</h1>
+
+      <div *ngIf="profile">
+        {{ profile.username }}
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="fright"></div>
+    <div style="clear: both"></div>
   </div>
-
-  <div class="fright"></div>
-  <div style="clear: both;"></div>
-</div>
-
 </body>
-

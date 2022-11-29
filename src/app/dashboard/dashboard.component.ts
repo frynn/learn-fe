@@ -6,28 +6,24 @@ import { AuthService } from '../shared/services/auth.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-
 })
 export class DashboardComponent implements OnInit {
   profile: IUser | null = null;
 
-  constructor(
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   ngOnInit(): void {
     this.getProfile();
   }
 
-  getProfile(){
-    this.authService.getProfile()
-    .subscribe({
-      next: (profile) => this.profile = profile,
-      error: (err) => console.error(err)
+  getProfile() {
+    this.authService.getProfile().subscribe({
+      next: (profile) => (this.profile = profile),
+      error: (err) => console.error(err),
     });
   }
 
-logout() {
+  logout() {
     this.profile = null;
     this.authService.logout();
   }

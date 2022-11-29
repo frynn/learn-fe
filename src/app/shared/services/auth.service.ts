@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this.access_token = response.access_token;
-        })
+        }),
       );
   }
 
