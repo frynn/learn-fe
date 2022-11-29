@@ -5,18 +5,18 @@
   <span class="example-spacer"></span>
 
   <div *ngIf="profile">
-    <button mat-icon-button class="example-icon person-icon" class="dashbord-buttom" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button class="example-icon person-icon" class="dashboard-button" aria-label="Example icon-button with heart icon">
       <mat-icon>person</mat-icon>
     </button>
   </div>
 
   <div *ngIf="!profile" >
     <a routerLink="/login">
-      <button class="dashbordbuttom">  <h2>Войдите в аккаунт</h2></button>
+      <button class="dashboard-button">  <h2>Войдите в аккаунт</h2></button>
     </a>
   </div>
 
-  <button mat-icon-button  [matMenuTriggerFor]="menu" class="example-icon person-icon" class="dashbordbuttom" aria-label="Example icon-button with heart icon">
+  <button mat-icon-button  [matMenuTriggerFor]="menu" class="example-icon person-icon" class="dashboard-button" aria-label="Example icon-button with heart icon">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -34,7 +34,7 @@
 
     <div *ngIf="profile">
       {{profile.username}}
-      <button (click)="logout()">Logout</button>
+      <button (click)="logout()" >Logout</button>
     </div>
   </div>
 
