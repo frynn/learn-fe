@@ -38,7 +38,7 @@ export class AuthService {
     this.profile = null;
   }
 
-  isAuthorized(): boolean {
+  isAuthenticated(): boolean {
     return Boolean(this.access_token);
   }
 
