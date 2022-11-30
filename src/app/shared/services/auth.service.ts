@@ -38,8 +38,8 @@ export class AuthService {
     this.profile = null;
   }
 
-  isAuthenticated(): boolean {
-    return Boolean(this.access_token);
+  isAuth(): boolean {
+    return !!this.access_token;
   }
 
   getProfile(): Observable<IUser | null> {
