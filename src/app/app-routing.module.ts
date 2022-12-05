@@ -17,7 +17,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'productstable',
+    path: 'products',
     component: ProductstableComponent,
   },
 ];
