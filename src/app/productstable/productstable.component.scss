@@ -1,3 +1,25 @@
 table {
   width: 100%;
 }
+body {
+  width: 100%;
+  height: 2150px;
+  background: #d9d9d9;
+}
+.fleft {
+  float: left;
+  width: 18.899%;
+  background: #d9d9d9;
+  height: 2040px;
+}
+
+.fcenter {
+  float: left;
+  width: 60%;
+  background: white;
+  height: 2000px;
+  border: 8px solid #c5c5c5;
+  padding: 12px;
+  border-radius: 30px;
+  border-width: 0px 8px 8px 3px;
+}

@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
   constructor(private readonly http: HttpClient) {}
 
-  getProducts(): Observable<IProduct[] | null> {
+  getProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiUrl}/products`);
   }
 }

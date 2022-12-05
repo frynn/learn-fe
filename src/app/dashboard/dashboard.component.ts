@@ -32,4 +32,7 @@ export class DashboardComponent implements OnInit {
     this.authService.logout();
     this.router.navigateByUrl('login');
   }
+  tableOfProduct() {
+    this.router.navigateByUrl('productstable');
+  }
 }

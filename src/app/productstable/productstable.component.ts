@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productstable',
@@ -8,7 +9,7 @@ import { ProductsService } from '../shared/services/products.service';
   styleUrls: ['./productstable.component.scss'],
 })
 export class ProductstableComponent implements OnInit {
-  products: IProduct[] | null = null;
+  products: IProduct[] = [];
   displayedColumns: string[] = [
     'id',
     'name',
@@ -26,7 +27,7 @@ export class ProductstableComponent implements OnInit {
   }
   getProducts() {
     this.productsService.getProducts().subscribe({
-      next: (products) => (products = products),
+      next: (products) => (this.products = products),
       error: (err) => console.error(err),
     });
   }
