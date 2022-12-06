@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { MatTableModule } from '@angular/material/table';
     DashboardComponent,
     LoginComponent,
     ProductstableComponent,
-   UsersComponent],
+    WrapperComponent,
+    UsersComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

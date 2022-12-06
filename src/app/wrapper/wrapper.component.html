@@ -1,0 +1,48 @@
+<body>
+  <mat-toolbar color="primary">
+    <span><h2>My Dashboard</h2></span>
+    <span class="example-spacer"></span>
+
+    <div class="dashboard-user" *ngIf="profile">
+      <h3>{{ profile.username }}</h3>
+      <button
+        mat-icon-button
+        class="example-icon person-icon dashboard-button"
+        aria-label="Example icon-button with heart icon"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+
+    <div *ngIf="!profile">
+      <a routerLink="/login">
+        <button class="dashboard-button"><h2>Войдите в аккаунт</h2></button>
+      </a>
+    </div>
+
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="example-icon person-icon dashboard-button"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <p></p>
+  <div class="wrap">
+    <div class="fleft"></div>
+    <div class="fcenter">
+      <router-outlet></router-outlet>
+      <a routerLink="/products"><button>Table of products</button></a>
+    </div>
+    <div class="fright"></div>
+    <div style="clear: both"></div>
+  </div>
+</body>
