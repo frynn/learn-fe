@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
@@ -23,7 +24,7 @@ import { MatTableModule } from '@angular/material/table';
     DashboardComponent,
     LoginComponent,
     ProductstableComponent,
-  ],
+   UsersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +37,7 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule,
+    MatTableModule
   ],
   providers: [
     {
