@@ -10,10 +10,10 @@ import { IUser } from '../shared/interfaces';
   
 export class UsersComponent implements OnInit {
   constructor(private readonly UsersService: UsersService) {}
-  users!: IUser[];
+  users: IUser[]=[];
 
   displayedColumns: string[] = ['UserId', 'Username', 'Email', 'Phone', 'Site'];
-  dataSource = this.users;
+  
  
   getUsers() {
     this.UsersService.getUsers().subscribe({
@@ -26,6 +26,3 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 }
-
-
-
