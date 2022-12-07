@@ -1,6 +1,8 @@
 <body>
   <mat-toolbar color="primary">
-    <span><h2>My Wrapper</h2></span>
+    <a routerLink="/">
+      <h2>Workshop</h2>
+    </a>
     <span class="example-spacer"></span>
 
     <div class="wrapper-user" *ngIf="profile">
@@ -31,6 +33,9 @@
     <mat-menu #menu="matMenu">
       <a routerLink="/products">
         <button mat-menu-item>Table of products</button>
+      </a>
+      <a routerLink="/users">
+        <button mat-menu-item>Table of users</button>
       </a>
       <button mat-menu-item (click)="logout()">
         <span>Logout</span>

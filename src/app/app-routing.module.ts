@@ -21,15 +21,15 @@ const routes: Routes = [
         path: 'products',
         component: ProductstableComponent,
       },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
     ],
   },
   {
     path: 'login',
     component: LoginComponent,
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
   },
 ];
 
