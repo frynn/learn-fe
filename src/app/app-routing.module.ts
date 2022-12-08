@@ -6,6 +6,7 @@ import { ProductstableComponent } from './productstable/productstable.component'
 import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UsersComponent } from './users/users.component';
+import { CreateproductComponent } from './createproduct/createproduct.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'createproducts',
+    component: CreateproductComponent,
   },
 ];
 

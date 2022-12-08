@@ -20,8 +20,11 @@ export class ProductstableComponent implements OnInit {
     'image',
     'country_of_origin',
   ];
+  constructor(
+    private readonly productsService: ProductsService,
+    private router: Router,
+  ) {}
 
-  constructor(private readonly productsService: ProductsService) {}
   ngOnInit(): void {
     this.getProducts();
   }
@@ -30,5 +33,8 @@ export class ProductstableComponent implements OnInit {
       next: (products) => (this.products = products),
       error: (err) => console.error(err),
     });
+  }
+  gocreate() {
+    this.router.navigateByUrl('createproducts');
   }
 }

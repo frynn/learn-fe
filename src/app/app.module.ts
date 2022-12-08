@@ -18,6 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { CreateproductComponent } from './createproduct/createproduct.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     LoginComponent,
     ProductstableComponent,
     WrapperComponent,
-    UsersComponent
+    UsersComponent,
+    CreateproductComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [
     {
