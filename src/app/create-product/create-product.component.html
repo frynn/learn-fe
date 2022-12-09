@@ -1,0 +1,76 @@
+<div class="login-background">
+  <div [formGroup]="formGroup" class="login-container">
+    <h1><strong>Creating a new product</strong></h1>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Name product</mat-label>
+      <input matInput type="text" placeholder="name" formControlName="name" />
+      <mat-error *ngIf="formGroup.controls['name'].invalid">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Manufacturer product</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="manufacturer"
+        formControlName="manufacturer"
+      />
+      <mat-error *ngIf="formGroup.controls['manufacturer'].invalid">
+        Manufacturer product is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Width product</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="width"
+        formControlName="width"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Height product</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="height"
+        formControlName="height"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Depth product</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="depth"
+        formControlName="depth"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Country of origin product</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="country_of_origin"
+        formControlName="country_of_origin"
+      />
+    </mat-form-field>
+
+    <button
+      mat-button
+      class="mat-button"
+      color="custom"
+      [disabled]="formGroup.invalid"
+      (click)="createproduct()"
+    >
+      Create
+    </button>
+  </div>
+</div>
