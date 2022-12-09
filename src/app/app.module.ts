@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProductstableComponent } from './productstable/productstable.component';
+import { ProductsComponent } from './products/products.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -18,17 +18,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { WrapperComponent } from './wrapper/wrapper.component';
-import { CreateproductComponent } from './createproduct/createproduct.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    ProductstableComponent,
+    ProductsComponent,
     WrapperComponent,
     UsersComponent,
-    CreateproductComponent,
+    CreateProductComponent,
   ],
   imports: [
     BrowserModule,
