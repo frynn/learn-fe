@@ -31,7 +31,7 @@ export class ProductsService {
   getProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiUrl}/products`);
   }
-  login(payload: IProductPayload): Observable<IProductDTO> {
+  createproduct(payload: IProductPayload): Observable<IProductDTO> {
     return this.http
       .post<IProductDTO>(`${environment.apiUrl}/products`, payload)
       .pipe(

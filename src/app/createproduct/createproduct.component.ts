@@ -24,11 +24,12 @@ export class CreateproductComponent implements OnInit {
     });
   }
 
-  login() {
-    this.productsService.login(this.formGroup.value).subscribe({
+  createproduct() {
+    this.productsService.createproduct(this.formGroup.value).subscribe({
       next: () => this.router.navigateByUrl('products'),
       error: (err) => console.error(err),
     });
+    this.router.navigateByUrl('products');
   }
   ngOnInit(): void {}
 }
