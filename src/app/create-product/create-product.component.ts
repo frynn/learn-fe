@@ -22,7 +22,6 @@ export class CreateProductComponent {
     private readonly fb: FormBuilder,
     private readonly productsService: ProductsService,
   ) {}
-
   createproduct() {
     this.productsService.createproduct(this.formGroup.value).subscribe({
       next: () => this.router.navigateByUrl('products'),
