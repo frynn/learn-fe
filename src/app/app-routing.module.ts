@@ -33,7 +33,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'createproducts',
+    path: 'create-product',
     component: CreateProductComponent,
   },
 ];

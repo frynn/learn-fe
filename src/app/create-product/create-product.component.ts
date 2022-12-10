@@ -7,22 +7,21 @@ import { ProductsService } from '../shared/services/products.service';
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss'],
 })
-export class CreateProductComponent implements OnInit {
-  formGroup: FormGroup;
+export class CreateProductComponent {
+  formGroup: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    manufacturer: ['', Validators.required],
+    width: [''],
+    height: [''],
+    depth: [''],
+    country_of_origin: [''],
+  });
+
   constructor(
     private router: Router,
     private readonly fb: FormBuilder,
     private readonly productsService: ProductsService,
-  ) {
-    this.formGroup = this.fb.group({
-      name: ['', Validators.required],
-      manufacturer: ['', Validators.required],
-      width: [''],
-      height: [''],
-      depth: [''],
-      country_of_origin: [''],
-    });
-  }
+  ) {}
 
   createproduct() {
     this.productsService.createproduct(this.formGroup.value).subscribe({
@@ -30,5 +29,4 @@ export class CreateProductComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-  ngOnInit(): void {}
 }

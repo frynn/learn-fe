@@ -46,6 +46,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<button mat-button class="mat-button" color="custom" (click)="gocreate()">
-  Create new product
-</button>
+<a routerLink="/create-product">
+  <button mat-button class="mat-button" color="custom">
+    Create new product
+  </button>
+</a>

@@ -34,7 +34,4 @@ export class ProductsComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-  gocreate() {
-    this.router.navigateByUrl('createproducts');
-  }
 }
