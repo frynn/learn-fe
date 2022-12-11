@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
-import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +20,37 @@ export class ProductsComponent implements OnInit {
     'depth',
     'image',
     'country_of_origin',
+    'delete',
   ];
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
+
+  openDialog(product: any): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.deleteProduct(product._id);
+        }
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
+  deleteProduct(id: string) {
+    this.productsService.deleteProduct(id).subscribe({
+      next: () => this.getProducts(),
+      error: (err) => console.error(err),
+    });
+  }
+
   getProducts() {
     this.productsService.getProducts().subscribe({
       next: (products) => (this.products = products),

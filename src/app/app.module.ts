@@ -19,6 +19,8 @@ import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { CreateProductComponent } from './products/create-product/create-product
     WrapperComponent,
     UsersComponent,
     CreateProductComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { CreateProductComponent } from './products/create-product/create-product
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatDialogModule,
   ],
   providers: [
     {
