@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  openDialog(product: any): void {
+  openDialog(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe({
