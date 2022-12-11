@@ -6,7 +6,7 @@ import { ProductsComponent } from './products/products.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UsersComponent } from './users/users.component';
-import { CreateProductComponent } from './create-product/create-product.component';
+import { CreateProductComponent } from './products/create-product/create-product.component';
 
 const routes: Routes = [
   {

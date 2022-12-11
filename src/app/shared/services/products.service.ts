@@ -13,7 +13,7 @@ export class ProductsService {
   getProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiUrl}/products`);
   }
-  createproduct(payload: IProduct): Observable<IProduct> {
+  createProduct(payload: IProduct): Observable<IProduct> {
     return this.http.post<IProduct>(`${environment.apiUrl}/products`, payload);
   }
 }

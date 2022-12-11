@@ -18,7 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { WrapperComponent } from './wrapper/wrapper.component';
-import { CreateProductComponent } from './create-product/create-product.component';
+import { CreateProductComponent } from './products/create-product/create-product.component';
 
 @NgModule({
   declarations: [
