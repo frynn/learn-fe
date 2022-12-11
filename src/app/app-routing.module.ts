@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -7,6 +7,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UsersComponent } from './users/users.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
+import { NewuserComponent } from './newuser/newuser.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,15 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersComponent,
+        children: [{
+          path: 'new',
+          component: NewuserComponent,
+        },
+        {
+          path: '',
+          component: UsersComponent,
+        }
+        ],
       },
       {
         path: 'create-product',
