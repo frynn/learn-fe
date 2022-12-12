@@ -7,7 +7,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UsersComponent } from './users/users.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
-import { NewuserComponent } from './newuser/newuser.component';
+import { NewUserComponent } from './users/new-user/new-user.component';
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'users',
         children: [{
           path: 'new',
-          component: NewuserComponent,
+          component: NewUserComponent,
         },
         {
           path: '',

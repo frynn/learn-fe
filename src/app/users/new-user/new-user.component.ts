@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../shared/services/users.service';
+import { UsersService } from '../../shared/services/users.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newuser',
-  templateUrl: './newuser.component.html',
-  styleUrls: ['./newuser.component.scss']
+  templateUrl: './new-user.component.html',
+  styleUrls: ['./new-user.component.scss']
 })
-export class NewuserComponent implements OnInit {
+export class NewUserComponent implements OnInit {
   formGroup: FormGroup = this.fb.group({
     username: this.fb.control<string>('', Validators.required),
     password: this.fb.control<string>('', Validators.required),
-    email: this.fb.control<string>('', Validators.required),
-    phone : this.fb.control<string | null>(''),
-    site: this.fb.control<string | null>(''),
+    email: this.fb.control<string>('', Validators.email),
+    phone : this.fb.control<string | null>('', Validators.pattern('[- +()0-9]{6,12}')),
+    site: this.fb.control<string | null>('', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')),
   });
   
 

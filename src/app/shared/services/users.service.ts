@@ -18,4 +18,5 @@ export class UsersService {
   newUser(payload: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${environment.apiUrl}/users`, payload);
   }
+
 }

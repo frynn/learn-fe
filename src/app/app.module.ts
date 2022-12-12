@@ -21,7 +21,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NewuserComponent } from './newuser/newuser.component';
+import { NewUserComponent } from './users/new-user/new-user.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { NewuserComponent } from './newuser/newuser.component';
     UsersComponent,
     CreateProductComponent,
     ConfirmationDialogComponent,
-    NewuserComponent,
+    NewUserComponent,
   ],
   imports: [
     BrowserModule,
