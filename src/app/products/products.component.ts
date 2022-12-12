@@ -32,7 +32,12 @@ export class ProductsComponent implements OnInit {
   }
 
   openDialog(product: IProduct): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Delete a product?',
+        buttonName: 'Delete',
+      },
+    });
 
     dialogRef.afterClosed().subscribe({
       next: (result) => {
