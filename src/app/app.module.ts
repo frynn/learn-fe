@@ -19,7 +19,7 @@ import { UsersComponent } from './users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewUserComponent } from './users/new-user/new-user.component';
 
