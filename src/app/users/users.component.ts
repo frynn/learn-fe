@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
     'Email',
     'Phone',
     'Site',
-    'delete',
+    'management',
   ];
 
   openDialog(user: IUser): void {
