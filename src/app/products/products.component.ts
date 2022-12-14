@@ -3,6 +3,7 @@ import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -20,13 +21,14 @@ export class ProductsComponent implements OnInit {
     'depth',
     'image',
     'country_of_origin',
+    'editing',
     'delete',
   ];
   constructor(
     private readonly productsService: ProductsService,
     private dialog: MatDialog,
+    private router: Router,
   ) {}
-
   ngOnInit(): void {
     this.getProducts();
   }

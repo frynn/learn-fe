@@ -9,6 +9,7 @@ import { UsersComponent } from './users/users.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
 import { NewUserComponent } from './users/new-user/new-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
+import { EditingProductComponent } from './products/editing-product/editing-product.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,20 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        component: ProductsComponent,
+        children: [
+          {
+            path: '',
+            component: ProductsComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: EditingProductComponent,
+          },
+          {
+            path: 'create-product',
+            component: CreateProductComponent,
+          },
+        ],
       },
       {
         path: 'users',
@@ -40,10 +54,6 @@ const routes: Routes = [
             component: UsersComponent,
           },
         ],
-      },
-      {
-        path: 'create-product',
-        component: CreateProductComponent,
       },
     ],
   },

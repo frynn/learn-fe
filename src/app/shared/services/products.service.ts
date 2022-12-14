@@ -19,4 +19,15 @@ export class ProductsService {
   deleteProduct(_id: string): Observable<string> {
     return this.http.delete<string>(`${environment.apiUrl}/products/${_id}`);
   }
+
+  editingProduct(payload: IProduct, _id: string): Observable<IProduct> {
+    return this.http.patch<IProduct>(
+      `${environment.apiUrl}/products/${_id}`,
+      payload,
+    );
+  }
+
+  findProduct(_id: string) {
+    return this.http.get<IProduct>(`${environment.apiUrl}/products/${_id}`);
+  }
 }
