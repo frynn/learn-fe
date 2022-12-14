@@ -18,6 +18,13 @@ export class UsersService {
     return this.http.post<IUser>(`${environment.apiUrl}/users`, payload);
   }
 
+  updateUser(id: string, payload: IUser): Observable<IUser> {
+    return this.http.patch<IUser>(`${environment.apiUrl}/users/${id}`, payload);
+  }
+
+  getUser(id: string): Observable<IUser> {
+    return this.http.get<IUser>(`${environment.apiUrl}/users/${id}`);
+  }
   deleteUser(_id: string): Observable<{ result: string }> {
     return this.http.delete<{ result: string }>(`${environment.apiUrl}/users/${_id}`);
   }

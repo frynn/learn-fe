@@ -26,12 +26,21 @@
 
   <ng-container matColumnDef="Site">
     <th mat-header-cell *matHeaderCellDef>Site</th>
-    <td mat-cell *matCellDef="let element">{{ element.site }}</td>
+    <td mat-cell *matCellDef="let users">{{ users.site }}</td>
   </ng-container>
 
   <ng-container matColumnDef="Avatar">
     <th mat-header-cell *matHeaderCellDef>Avatar</th>
-    <td mat-cell *matCellDef="let element">{{ element.avatar }}</td>
+    <td mat-cell *matCellDef="let users">{{ users.avatar }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let users">
+      <button mat-icon-button [routerLink]="['/users', 'edit', users.userId]">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="management">
@@ -47,5 +56,5 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 <div class="container">
-  <button routerLink="/users/new">Add User</button>
+  <button routerLink="/users/new">New User</button>
 </div>

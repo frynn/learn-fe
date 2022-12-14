@@ -22,6 +22,7 @@ import { CreateProductComponent } from './products/create-product/create-product
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewUserComponent } from './users/new-user/new-user.component';
+import { EditUserComponent } from './users/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NewUserComponent } from './users/new-user/new-user.component';
     CreateProductComponent,
     ConfirmationDialogComponent,
     NewUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

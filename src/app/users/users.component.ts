@@ -22,6 +22,7 @@ export class UsersComponent implements OnInit {
     'Email',
     'Phone',
     'Site',
+    'Edit',
     'management',
   ];
 

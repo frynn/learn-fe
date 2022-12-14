@@ -1,0 +1,40 @@
+.user-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-container {
+  background-color: #ffffff;
+  padding: 60px 50px;
+  border-radius: 26px;
+}
+
+.mat-input {
+  width: 250px;
+}
+
+.mat-button {
+  width: 100px;
+}
+
+.mat-input,
+.mat-button {
+  margin: auto;
+  font-size: medium;
+  margin-top: 26px;
+}
+
+.mat-button.mat-custom {
+  color: #ffffff;
+  background-color: #555555;
+}
+
+.mat-button.mat-custom:hover {
+  background-color: #414141;
+}
+
+.mat-button.mat-custom:disabled {
+  background-color: #949494;
+}

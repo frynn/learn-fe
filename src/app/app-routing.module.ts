@@ -8,6 +8,7 @@ import { WrapperComponent } from './wrapper/wrapper.component';
 import { UsersComponent } from './users/users.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
 import { NewUserComponent } from './users/new-user/new-user.component';
+import { EditUserComponent } from './users/edit-user/edit-user.component';
 
 const routes: Routes = [
   {
@@ -25,14 +26,19 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        children: [{
-          path: 'new',
-          component: NewUserComponent,
-        },
-        {
-          path: '',
-          component: UsersComponent,
-        }
+        children: [
+          {
+            path: 'new',
+            component: NewUserComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: EditUserComponent,
+          },
+          {
+            path: '',
+            component: UsersComponent,
+          },
         ],
       },
       {
