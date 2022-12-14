@@ -1,6 +1,6 @@
 <div class="login-background" *ngIf="product">
   <div [formGroup]="formGroup" class="login-container">
-    <h1><strong>Editing a product</strong></h1>
+    <h1><strong>Edit a product</strong></h1>
 
     <mat-form-field class="mat-input">
       <mat-label>Name product</mat-label>
@@ -67,7 +67,7 @@
       mat-button
       class="mat-button"
       color="custom"
-      [disabled]="formGroup.invalid"
+      [disabled]="formGroup.invalid || !formGroup.dirty"
       (click)="editingProduct()"
     >
       Save
