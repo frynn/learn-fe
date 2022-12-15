@@ -8,9 +8,7 @@ import { IUser } from 'src/app/shared/interfaces';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss'],
 })
-export class EditUserComponent implements OnInit {
-  users: IUser[] = [];
-
+export class EditUserComponent {
   formGroup?: FormGroup;
 
   id?: string;
@@ -59,6 +57,4 @@ export class EditUserComponent implements OnInit {
       error: (err) => console.error(err),
     });
   }
-
-  ngOnInit(): void {}
 }

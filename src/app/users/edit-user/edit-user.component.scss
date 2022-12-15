@@ -16,14 +16,13 @@
 }
 
 .mat-button {
-  width: 100px;
+  width: fit-content;
 }
 
 .mat-input,
 .mat-button {
-  margin: auto;
   font-size: medium;
-  margin-top: 26px;
+  border-radius: 10px;
 }
 
 .mat-button.mat-custom {
@@ -37,4 +36,11 @@
 
 .mat-button.mat-custom:disabled {
   background-color: #949494;
+}
+
+.btns-div {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
 }

@@ -31,14 +31,18 @@
     <mat-label>Site</mat-label>
     <input matInput placeholder="Your Site" formControlName="site" />
   </mat-form-field>
-
-  <button
-    mat-button
-    class="mat-button"
-    color="custom"
-    [disabled]="formGroup.invalid"
-    (click)="updateUser()"
-  >
-    Edit user
-  </button>
+  <div class="btns-div">
+    <button
+      mat-button
+      class="mat-button"
+      color="custom"
+      [disabled]="formGroup.invalid"
+      (click)="updateUser()"
+    >
+      Save changes
+    </button>
+    <button mat-button class="mat-button" color="#fff" routerLink="/users">
+      Cancel
+    </button>
+  </div>
 </div>

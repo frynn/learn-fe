@@ -1,61 +1,45 @@
- <div [formGroup]="formGroup" class="user-container">
-    <h1><strong>New User</strong></h1>
+<div [formGroup]="formGroup" class="user-container">
+  <h1><strong>New User</strong></h1>
 
-    <mat-form-field class="mat-input">
-      <mat-label>Username</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Username"
-        formControlName="username"
-      />
-      <mat-error *ngIf="formGroup.controls['username'].invalid">
-        Username is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field class="mat-input">
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="Username"
+      formControlName="username"
+    />
+    <mat-error *ngIf="formGroup.controls['username'].invalid">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field class="mat-input">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        placeholder="Password"
-        formControlName="password"
-      />
-      <mat-error *ngIf="formGroup.controls['password'].invalid">
-        Password is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field class="mat-input">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" formControlName="password" />
+    <mat-error *ngIf="formGroup.controls['password'].invalid">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field class="mat-input">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        placeholder="email"
-        formControlName="email"
-      />
-      <mat-error *ngIf="formGroup.controls['email'].invalid">
-        Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+  <mat-form-field class="mat-input">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="email" formControlName="email" />
+    <mat-error *ngIf="formGroup.controls['email'].invalid">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field class="mat-input">
-      <mat-label>Phone</mat-label>
-      <input
-        matInput
-        placeholder="phone"
-        formControlName="phone"
-      />
-    </mat-form-field>
+  <mat-form-field class="mat-input">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="phone" formControlName="phone" />
+  </mat-form-field>
 
-    <mat-form-field class="mat-input">
-      <mat-label>Site</mat-label>
-      <input
-        matInput
-        placeholder="Your Site"
-        formControlName="site"
-      />
-    </mat-form-field>
-
+  <mat-form-field class="mat-input">
+    <mat-label>Site</mat-label>
+    <input matInput placeholder="Your Site" formControlName="site" />
+  </mat-form-field>
+  <div class="btns-div">
     <button
       mat-button
       class="mat-button"
@@ -65,4 +49,8 @@
     >
       Add user
     </button>
+    <button mat-button class="mat-button" color="#fff" routerLink="/users">
+      Cancel
+    </button>
   </div>
+</div>
