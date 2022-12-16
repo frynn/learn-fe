@@ -1,5 +1,10 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Component, Injectable, NgModule } from '@angular/core';
+import {
+  RouterModule,
+  RouterStateSnapshot,
+  Routes,
+  TitleStrategy,
+} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { ProductsComponent } from './products/products.component';
@@ -11,7 +16,21 @@ import { NewUserComponent } from './users/new-user/new-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { NotAuthGuard } from './shared/guards/not-auth.guard';
 import { EditingProductComponent } from './products/editing-product/editing-product.component';
+import { Title } from '@angular/platform-browser';
 
+@Injectable()
+export class TemplatePageTitleStrategy extends TitleStrategy {
+  constructor(private readonly title: Title) {
+    super();
+  }
+
+  override updateTitle(routerState: RouterStateSnapshot) {
+    const title = this.buildTitle(routerState);
+    if (title !== undefined) {
+      this.title.setTitle(`Workshop - ${title}`);
+    }
+  }
+}
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +39,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Workshop - Main menu',
+        title: 'Main menu',
         component: DashboardComponent,
       },
       {
@@ -28,17 +47,17 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            title: 'Workshop - Products',
+            title: 'Products',
             component: ProductsComponent,
           },
           {
             path: 'edit/:id',
-            title: 'Workshop - Edit a product',
+            title: 'Edit a product',
             component: EditingProductComponent,
           },
           {
             path: 'create-product',
-            title: 'Workshop - Creat a product',
+            title: 'Creat a product',
             component: CreateProductComponent,
           },
         ],
@@ -48,17 +67,17 @@ const routes: Routes = [
         children: [
           {
             path: 'new',
-            title: 'Workshop - Creat a user',
+            title: 'Creat a user',
             component: NewUserComponent,
           },
           {
             path: 'edit/:id',
-            title: 'Workshop - Edit a user',
+            title: 'Edit a user',
             component: EditUserComponent,
           },
           {
             path: '',
-            title: 'Workshop - Users',
+            title: 'Users',
             component: UsersComponent,
           },
         ],
@@ -75,5 +94,11 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [
+    {
+      provide: TitleStrategy,
+      useClass: TemplatePageTitleStrategy,
+    },
+  ],
 })
 export class AppRoutingModule {}
