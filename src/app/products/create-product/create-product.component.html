@@ -63,6 +63,35 @@
       />
     </mat-form-field>
 
+    <mat-form-field class="mat-input">
+      <mat-label>Image name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="image"
+        formControlName="image"
+        readonly
+      />
+    </mat-form-field>
+
+    <button
+      mat-button
+      class="mat-button"
+      id="loadImage"
+      color="custom"
+      (click)="image.click()"
+    >
+      Load image
+    </button>
+
+    <input
+      type="file"
+      accept="image/*"
+      hidden
+      #image
+      (change)="onLoadImage($event)"
+    />
+
     <button
       mat-button
       class="mat-button"
