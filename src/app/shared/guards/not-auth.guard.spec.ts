@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { NotAuthGuard } from './not-auth.guard';
 
-describe('UnauthGuard', () => {
+describe('NotAuthGuard', () => {
   let guard: NotAuthGuard;
 
   beforeEach(() => {
