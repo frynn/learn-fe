@@ -10,12 +10,10 @@ import { Router } from '@angular/router';
 })
 export class WrapperComponent implements OnInit {
   profile: IUser | null = null;
-
   constructor(
     private readonly authService: AuthService,
     private router: Router,
   ) {}
-
   ngOnInit(): void {
     this.getProfile();
   }

@@ -20,6 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        title: 'Workshop - Main menu',
         component: DashboardComponent,
       },
       {
@@ -27,14 +28,17 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            title: 'Workshop - Products',
             component: ProductsComponent,
           },
           {
             path: 'edit/:id',
+            title: 'Workshop - Edit a product',
             component: EditingProductComponent,
           },
           {
             path: 'create-product',
+            title: 'Workshop - Creat a product',
             component: CreateProductComponent,
           },
         ],
@@ -44,14 +48,17 @@ const routes: Routes = [
         children: [
           {
             path: 'new',
+            title: 'Workshop - Creat a user',
             component: NewUserComponent,
           },
           {
             path: 'edit/:id',
+            title: 'Workshop - Edit a user',
             component: EditUserComponent,
           },
           {
             path: '',
+            title: 'Workshop - Users',
             component: UsersComponent,
           },
         ],
