@@ -46,7 +46,7 @@ export class CreateProductComponent {
     const target = <HTMLInputElement>event.target;
     if (target.files) {
       formdata.append('file', target.files[0]);
-      this.imagesService.newImage(formdata).subscribe({
+      this.imagesService.uploadImage(formdata).subscribe({
         next: (result) =>
           this.formGroup.patchValue({
             image: result.filename,

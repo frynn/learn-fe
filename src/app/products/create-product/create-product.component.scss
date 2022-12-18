@@ -15,6 +15,10 @@
   width: 300px;
 }
 
+.mat-form-field:has(input[readonly]) {
+  opacity: 0.5;
+}
+
 .mat-button {
   width: 100px;
 }

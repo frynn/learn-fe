@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ImagesService {
   constructor(private readonly http: HttpClient) {}
 
-  newImage(
+  uploadImage(
     formData: FormData,
   ): Observable<{ originalname: string; filename: string }> {
     return this.http.post<{ originalname: string; filename: string }>(
