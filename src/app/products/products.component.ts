@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, AfterViewInit {
   products: IProduct[] = [];
   displayedColumns: string[] = [
     'id',
@@ -24,10 +25,17 @@ export class ProductsComponent implements OnInit {
     'editing',
     'delete',
   ];
+  dataSource = new MatTableDataSource<IProduct>(this.products);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   constructor(
     private readonly productsService: ProductsService,
     private dialog: MatDialog,
-    private router: Router,
   ) {}
   ngOnInit(): void {
     this.getProducts();
@@ -60,7 +68,10 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.productsService.getProducts().subscribe({
-      next: (products) => (this.products = products),
+      next: (products) => {
+        this.products = products;
+        console.log(this.dataSource);
+      },
       error: (err) => console.error(err),
     });
   }

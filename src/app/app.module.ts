@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NewUserComponent } from './users/new-user/new-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { EditingProductComponent } from './products/editing-product/editing-product.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { EditingProductComponent } from './products/editing-product/editing-prod
     ConfirmationDialogComponent,
     NewUserComponent,
     EditingProductComponent,
-EditUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +54,7 @@ EditUserComponent,
     MatIconModule,
     MatTableModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [
     {
