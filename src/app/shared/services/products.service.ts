@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { IProduct } from '../interfaces/product.interface';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { IPaginatedResponse } from '../interfaces/paginated-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,24 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
   constructor(private readonly http: HttpClient) {}
 
-  getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(`${environment.apiUrl}/products`);
+  getProducts(
+    start?: number,
+    limit?: number,
+  ): Observable<IPaginatedResponse<IProduct[]>> {
+    if (start === undefined || limit === undefined) {
+      return this.http.get<IPaginatedResponse<IProduct[]>>(
+        `${environment.apiUrl}/products`,
+      );
+    }
+    const params = new HttpParams()
+      .set('start', start * limit)
+      .set('limit', limit);
+    return this.http.get<IPaginatedResponse<IProduct[]>>(
+      `${environment.apiUrl}/products`,
+      { params },
+    );
   }
+
   createProduct(payload: IProduct): Observable<IProduct> {
     return this.http.post<IProduct>(`${environment.apiUrl}/products`, payload);
   }

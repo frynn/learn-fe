@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -11,8 +11,15 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit, AfterViewInit {
+export class ProductsComponent implements OnInit {
+  constructor(
+    private readonly productsService: ProductsService,
+    private dialog: MatDialog,
+  ) {}
+  lenght!: number;
   products: IProduct[] = [];
+  currentPageIndex!: number;
+  currentpageSize!: number;
   displayedColumns: string[] = [
     'id',
     'name',
@@ -25,21 +32,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     'editing',
     'delete',
   ];
-  dataSource = new MatTableDataSource<IProduct>(this.products);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  constructor(
-    private readonly productsService: ProductsService,
-    private dialog: MatDialog,
-  ) {}
-  ngOnInit(): void {
-    this.getProducts();
-  }
+  dataSource = new MatTableDataSource(this.products);
 
   openDialog(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -61,18 +55,29 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   deleteProduct(id: string) {
     this.productsService.deleteProduct(id).subscribe({
-      next: () => this.getProducts(),
+      next: () => this.getProducts(this.currentPageIndex, this.currentpageSize),
       error: (err) => console.error(err),
     });
   }
 
-  getProducts() {
-    this.productsService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-        console.log(this.dataSource);
+  getProducts(start?: number, limit?: number) {
+    this.productsService.getProducts(start, limit).subscribe({
+      next: (response) => {
+        this.products = response.data;
+        this.dataSource.data = response.data;
+        this.lenght = response.total;
       },
       error: (err) => console.error(err),
     });
+  }
+
+  ngOnInit(): void {
+    this.getProducts(0, 5);
+  }
+
+  onPage(event: PageEvent) {
+    this.getProducts(event.pageIndex, event.pageSize);
+    this.currentPageIndex = event.pageIndex;
+    this.currentpageSize = event.pageSize;
   }
 }
