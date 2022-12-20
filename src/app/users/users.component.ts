@@ -3,7 +3,7 @@ import { UsersService } from '../shared/services/users.service';
 import { IUser } from '../shared/interfaces';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -57,8 +57,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getUsers() {
-    this.UsersService.getUsers().subscribe({
+  getUsers(start?: number, limit?: number) {
+    this.UsersService.getUsers(start, limit).subscribe({
       next: (users) => {
         this.users = users;
         this.dataSource.data = users;
@@ -68,9 +68,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUsers(0, 5);
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  onPage(event: PageEvent) {
+    this.getUsers(event.pageIndex, event.pageSize);
   }
 }

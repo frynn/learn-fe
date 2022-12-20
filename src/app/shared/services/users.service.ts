@@ -10,11 +10,13 @@ import { IUser } from '../interfaces';
 export class UsersService {
   constructor(private readonly http: HttpClient) {}
 
-  getUsers(limit?: number, count?: number): Observable<IUser[]> {
-    if (!limit || !count) {
+  getUsers(start?: number, limit?: number): Observable<IUser[]> {
+    if (start === undefined || limit === undefined) {
       return this.http.get<IUser[]>(`${environment.apiUrl}/users`);
     }
-    const params = new HttpParams().set('limit', limit).set('count', count);
+    const params = new HttpParams()
+      .set('start', start * limit)
+      .set('limit', limit);
     return this.http.get<IUser[]>(`${environment.apiUrl}/users`, { params });
   }
 

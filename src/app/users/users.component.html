@@ -1,4 +1,8 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  [pageSize]="5"
+  (page)="onPage($event)"
+></mat-paginator>
 <table mat-table [dataSource]="dataSource" style="width: 100%">
   <ng-container matColumnDef="UserId">
     <th mat-header-cell *matHeaderCellDef>UserID</th>
