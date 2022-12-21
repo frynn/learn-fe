@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
+import { ImagesService } from '../shared/services/images.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { map, mergeAll, mergeMap, of, toArray } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -14,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ProductsComponent implements OnInit {
   constructor(
     private readonly productsService: ProductsService,
+    private readonly imagesService: ImagesService,
     private dialog: MatDialog,
   ) {}
   length!: number;
@@ -60,13 +63,28 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts(start?: number, limit?: number) {
-    this.productsService.getProducts(start, limit).subscribe({
-      next: (response) => {
-        this.dataSource.data = response.data;
-        this.length = response.total;
-      },
-      error: (err) => console.error(err),
-    });
+    this.productsService
+      .getProducts(start, limit)
+      .pipe(
+        map((response) => {
+          this.length = response.total;
+          return response.data;
+        }),
+        mergeAll(),
+        mergeMap((product) => {
+          if (product.image) {
+            return this.imagesService
+              .getImage(product.image)
+              .pipe(map((imagePreview) => ({ ...product, imagePreview })));
+          }
+          return of(product);
+        }),
+        toArray(),
+      )
+      .subscribe({
+        next: (products) => (this.dataSource.data = products),
+        error: (err) => console.error(err),
+      });
   }
 
   ngOnInit(): void {

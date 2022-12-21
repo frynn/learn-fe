@@ -7,4 +7,5 @@ export interface IProduct {
   depth?: number;
   image?: string;
   country_of_origin?: string;
+  imagePreview?: any;
 }
