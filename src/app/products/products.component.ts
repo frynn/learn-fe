@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -16,10 +16,9 @@ export class ProductsComponent implements OnInit {
     private readonly productsService: ProductsService,
     private dialog: MatDialog,
   ) {}
-  lenght!: number;
-  products: IProduct[] = [];
-  currentPageIndex!: number;
-  currentpageSize!: number;
+  length!: number;
+  currentPageIndex: number = 0;
+  currentPageSize: number = 5;
   displayedColumns: string[] = [
     'id',
     'name',
@@ -33,7 +32,7 @@ export class ProductsComponent implements OnInit {
     'delete',
   ];
 
-  dataSource = new MatTableDataSource(this.products);
+  dataSource = new MatTableDataSource([] as IProduct[]);
 
   openDialog(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -55,7 +54,7 @@ export class ProductsComponent implements OnInit {
 
   deleteProduct(id: string) {
     this.productsService.deleteProduct(id).subscribe({
-      next: () => this.getProducts(this.currentPageIndex, this.currentpageSize),
+      next: () => this.getProducts(this.currentPageIndex, this.currentPageSize),
       error: (err) => console.error(err),
     });
   }
@@ -63,21 +62,20 @@ export class ProductsComponent implements OnInit {
   getProducts(start?: number, limit?: number) {
     this.productsService.getProducts(start, limit).subscribe({
       next: (response) => {
-        this.products = response.data;
         this.dataSource.data = response.data;
-        this.lenght = response.total;
+        this.length = response.total;
       },
       error: (err) => console.error(err),
     });
   }
 
   ngOnInit(): void {
-    this.getProducts(0, 5);
+    this.getProducts(this.currentPageIndex, this.currentPageSize);
   }
 
   onPage(event: PageEvent) {
     this.getProducts(event.pageIndex, event.pageSize);
     this.currentPageIndex = event.pageIndex;
-    this.currentpageSize = event.pageSize;
+    this.currentPageSize = event.pageSize;
   }
 }
