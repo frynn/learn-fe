@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../shared/services/users.service';
 import { IUser } from '../shared/interfaces';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -12,13 +12,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-
   constructor(
     private readonly UsersService: UsersService,
     private dialog: MatDialog,
   ) {}
-  users: IUser[] = [];
 
   displayedColumns: string[] = [
     'UserId',
@@ -30,7 +27,10 @@ export class UsersComponent implements OnInit {
     'management',
   ];
 
-  dataSource = new MatTableDataSource(this.users);
+  dataSource = new MatTableDataSource([] as IUser[]);
+  length!: number;
+  currentPageIndex: number = 0;
+  currentPageSize: number = 5;
 
   openDialog(user: IUser): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -52,29 +52,28 @@ export class UsersComponent implements OnInit {
 
   deleteUser(id: string) {
     this.UsersService.deleteUser(id).subscribe({
-      next: () => this.getUsers(),
+      next: () => this.getUsers(this.currentPageIndex, this.currentPageSize),
       error: (err) => console.error(err),
     });
   }
 
   getUsers(start?: number, limit?: number) {
     this.UsersService.getUsers(start, limit).subscribe({
-      next: (users) => {
-        this.users = users;
-        this.dataSource.data = users;
+      next: (response) => {
+        this.dataSource.data = response.data;
+        this.length = response.total;
       },
       error: (err) => console.error(err),
     });
   }
 
   ngOnInit(): void {
-    this.getUsers(0, 5);
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.getUsers(this.currentPageIndex, this.currentPageSize);
   }
 
   onPage(event: PageEvent) {
     this.getUsers(event.pageIndex, event.pageSize);
+    this.currentPageIndex = event.pageIndex;
+    this.currentPageSize = event.pageSize;
   }
 }

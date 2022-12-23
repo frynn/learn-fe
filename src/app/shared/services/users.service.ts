@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces';
+import { IPaginatedResponse } from '../interfaces/paginated-response';
 
 @Injectable({
   providedIn: 'root',
@@ -10,14 +11,22 @@ import { IUser } from '../interfaces';
 export class UsersService {
   constructor(private readonly http: HttpClient) {}
 
-  getUsers(start?: number, limit?: number): Observable<IUser[]> {
+  getUsers(
+    start?: number,
+    limit?: number,
+  ): Observable<IPaginatedResponse<IUser[]>> {
     if (start === undefined || limit === undefined) {
-      return this.http.get<IUser[]>(`${environment.apiUrl}/users`);
+      return this.http.get<IPaginatedResponse<IUser[]>>(
+        `${environment.apiUrl}/users`,
+      );
     }
     const params = new HttpParams()
       .set('start', start * limit)
       .set('limit', limit);
-    return this.http.get<IUser[]>(`${environment.apiUrl}/users`, { params });
+    return this.http.get<IPaginatedResponse<IUser[]>>(
+      `${environment.apiUrl}/users`,
+      { params },
+    );
   }
 
   newUser(payload: IUser): Observable<IUser> {
@@ -31,9 +40,9 @@ export class UsersService {
   getUser(id: string): Observable<IUser> {
     return this.http.get<IUser>(`${environment.apiUrl}/users/${id}`);
   }
-  deleteUser(_id: string): Observable<{ result: string }> {
+  deleteUser(id: string): Observable<{ result: string }> {
     return this.http.delete<{ result: string }>(
-      `${environment.apiUrl}/users/${_id}`,
+      `${environment.apiUrl}/users/${id}`,
     );
   }
 }
