@@ -5,6 +5,8 @@ import { ConfirmationDialogComponent } from '../shared/components/confirmation-d
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ImagesService } from '../shared/services/images.service';
+import { map, mergeAll, mergeMap, of, toArray } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -14,12 +16,14 @@ import { MatTableDataSource } from '@angular/material/table';
 export class UsersComponent implements OnInit {
   constructor(
     private readonly UsersService: UsersService,
+    private readonly imagesService: ImagesService,
     private dialog: MatDialog,
   ) {}
 
   displayedColumns: string[] = [
     'UserId',
     'Username',
+    'imagePreview',
     'Email',
     'Phone',
     'Site',
@@ -58,13 +62,27 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(start?: number, limit?: number) {
-    this.UsersService.getUsers(start, limit).subscribe({
-      next: (response) => {
-        this.dataSource.data = response.data;
-        this.length = response.total;
-      },
-      error: (err) => console.error(err),
-    });
+    this.UsersService.getUsers(start, limit)
+      .pipe(
+        map((response) => {
+          this.length = response.total;
+          return response.data;
+        }),
+        mergeAll(),
+        mergeMap((user) => {
+          if (user.avatar) {
+            return this.imagesService
+              .getImage(user.avatar)
+              .pipe(map((imagePreview) => ({ ...user, imagePreview })));
+          }
+          return of(user);
+        }),
+        toArray(),
+      )
+      .subscribe({
+        next: (users) => (this.dataSource.data = users),
+        error: (err) => console.error(err),
+      });
   }
 
   ngOnInit(): void {

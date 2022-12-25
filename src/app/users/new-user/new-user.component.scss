@@ -44,3 +44,11 @@
   gap: 20px;
   justify-content: center;
 }
+
+.mat-form-field:has(input[readonly]) {
+  opacity: 0.5;
+}
+
+#loadImage {
+  width: 120px;
+}
