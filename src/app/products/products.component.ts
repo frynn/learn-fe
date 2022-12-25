@@ -23,13 +23,8 @@ export class ProductsComponent implements OnInit {
   currentPageIndex: number = 0;
   currentPageSize: number = 5;
   displayedColumns: string[] = [
-    'id',
     'name',
     'manufacturer',
-    'weight',
-    'height',
-    'depth',
-    'image',
     'country_of_origin',
     'editing',
     'delete',

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class WrapperComponent implements OnInit {
   profile: IUser | null = null;
+  windowWidth = window.innerWidth;
   constructor(
     private readonly authService: AuthService,
     private router: Router,
