@@ -4,23 +4,10 @@ import { ProductsService } from '../shared/services/products.service';
 import { ImagesService } from '../shared/services/images.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  map,
-  mergeAll,
-  mergeMap,
-  of,
-  toArray,
-  Subject,
-  observable,
-} from 'rxjs';
+import { map, mergeAll, mergeMap, of, toArray, Subject } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState,
-} from '@angular/cdk/layout';
-import { takeUntil } from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -68,10 +55,6 @@ export class ProductsComponent implements OnInit {
 
       this.displayedColumns.push('editing', 'delete');
     });
-  }
-  ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.complete();
   }
   length!: number;
   currentPageIndex: number = 0;
