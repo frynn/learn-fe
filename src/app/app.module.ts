@@ -25,6 +25,7 @@ import { NewUserComponent } from './users/new-user/new-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { EditingProductComponent } from './products/editing-product/editing-product.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
   providers: [
     {

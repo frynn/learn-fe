@@ -44,20 +44,13 @@
   </mat-toolbar>
 
   <p></p>
-  <div class="wrap">
-    <div *ngIf="windowWidth >= 575">
-      <div class="fleft"></div>
-      <div class="fcenter">
+  <div class="bodyForContent">
+    <mat-card class="sizeBig" id="bodyForContent">
+      <mat-card-actions>
         <router-outlet></router-outlet>
-      </div>
-    </div>
-
-    <div *ngIf="windowWidth < 575">
-      <div class="fcenter2">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-
-    <div style="clear: both"></div>
+      </mat-card-actions>
+    </mat-card>
   </div>
+
+  <div style="clear: both"></div>
 </body>
