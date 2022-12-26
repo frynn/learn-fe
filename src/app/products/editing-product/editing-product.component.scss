@@ -19,6 +19,20 @@
   width: 100px;
 }
 
+#loadImage {
+  width: 120px;
+}
+
+.mat-form-field:has(input[readonly]) {
+  opacity: 0.5;
+}
+
+.image {
+  width: 300px;
+  height: 200px;
+  object-fit: contain;
+}
+
 .mat-input,
 .mat-button {
   margin: auto;

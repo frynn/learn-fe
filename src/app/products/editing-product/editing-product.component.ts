@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductsService } from '../../shared/services/products.service';
+import { ImagesService } from '../../shared/services/images.service';
 
 @Component({
   selector: 'app-editing-product',
@@ -19,12 +20,14 @@ export class EditingProductComponent {
     private activatedRoute: ActivatedRoute,
     private readonly fb: FormBuilder,
     private readonly productsService: ProductsService,
+    private readonly imagesService: ImagesService,
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       this.productsService.findProduct(this.id!).subscribe({
         next: (product) => {
           this.product = product;
+          this.downloadImage(this.product.image);
           this.formGroup = this.fb.group({
             name: this.fb.control<string>(
               this.product.name,
@@ -49,11 +52,22 @@ export class EditingProductComponent {
             country_of_origin: this.fb.control<string>(
               String(this.product.country_of_origin),
             ),
+            image: this.fb.control<string>(String(this.product.image || '')),
           });
         },
         error: (err) => console.error(err),
       });
     });
+  }
+
+  downloadImage(image?: string) {
+    if (image) {
+      this.imagesService.getImage(image).subscribe((imagePreview) => {
+        if (this.product) {
+          this.product.imagePreview = imagePreview;
+        }
+      });
+    }
   }
 
   editingProduct() {
@@ -63,5 +77,23 @@ export class EditingProductComponent {
         next: () => this.router.navigateByUrl('products'),
         error: (err) => console.error(err),
       });
+  }
+
+  onLoadImage(event: Event) {
+    const formdata = new FormData();
+    const target = <HTMLInputElement>event.target;
+    if (target.files) {
+      formdata.append('file', target.files[0]);
+      this.imagesService.uploadImage(formdata).subscribe({
+        next: (result) => {
+          this.formGroup.patchValue({
+            image: result.filename,
+          });
+          this.downloadImage(result.filename);
+          this.formGroup.markAsDirty();
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 }

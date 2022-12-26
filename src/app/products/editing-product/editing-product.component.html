@@ -2,6 +2,12 @@
   <div [formGroup]="formGroup" class="login-container">
     <h1><strong>Edit a product</strong></h1>
 
+    <img
+      *ngIf="product.imagePreview"
+      [src]="product.imagePreview"
+      class="image"
+    />
+
     <mat-form-field class="mat-input">
       <mat-label>Name product</mat-label>
       <input matInput type="text" placeholder="name" formControlName="name" />
@@ -62,6 +68,35 @@
         formControlName="country_of_origin"
       />
     </mat-form-field>
+
+    <mat-form-field class="mat-input">
+      <mat-label>Image name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="image"
+        formControlName="image"
+        readonly
+      />
+    </mat-form-field>
+
+    <button
+      mat-button
+      class="mat-button"
+      id="loadImage"
+      color="custom"
+      (click)="image.click()"
+    >
+      Load image
+    </button>
+
+    <input
+      type="file"
+      accept="image/*"
+      hidden
+      #image
+      (change)="onLoadImage($event)"
+    />
 
     <button
       mat-button
