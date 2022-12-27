@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../shared/services/users.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/shared/interfaces';
+import { ImagesService } from 'src/app/shared/services/images.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -10,7 +11,6 @@ import { IUser } from 'src/app/shared/interfaces';
 })
 export class EditUserComponent {
   formGroup?: FormGroup;
-
   id?: string;
   user?: IUser;
 
@@ -19,12 +19,14 @@ export class EditUserComponent {
     private readonly usersService: UsersService,
     private readonly router: Router,
     private activatedRoute: ActivatedRoute,
+    private imagesService: ImagesService,
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params['id'];
       usersService.getUser(this.id!).subscribe({
         next: (user) => {
           this.user = user;
+          this.downloadImage(this.user.avatar);
           this.formGroup = this.fb.group({
             username: this.fb.control<string>(
               this.user.username,
@@ -44,6 +46,7 @@ export class EditUserComponent {
                 '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?',
               ),
             ),
+            avatar: this.fb.control<string>(String(this.user.avatar || '')),
           });
         },
         error: (err) => console.error(err),
@@ -51,10 +54,38 @@ export class EditUserComponent {
     });
   }
 
+  downloadImage(avatar?: string) {
+    if (avatar) {
+      this.imagesService.getImage(avatar).subscribe((imagePreview) => {
+        if (this.user) {
+          this.user.imagePreview = imagePreview;
+        }
+      });
+    }
+  }
+
   updateUser() {
     this.usersService.updateUser(this.id!, this.formGroup!.value).subscribe({
       next: () => this.router.navigateByUrl('users'),
       error: (err) => console.error(err),
     });
+  }
+
+  onLoadImage(event: Event) {
+    const formdata = new FormData();
+    const target = <HTMLInputElement>event.target;
+    if (target.files) {
+      formdata.append('file', target.files[0]);
+      this.imagesService.uploadImage(formdata).subscribe({
+        next: (result) => {
+          this.formGroup?.patchValue({
+            avatar: result.filename,
+          });
+          this.downloadImage(result.filename);
+          this.formGroup?.markAsDirty();
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 }

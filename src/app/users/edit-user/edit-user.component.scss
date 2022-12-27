@@ -17,6 +17,7 @@
 
 .mat-button {
   width: fit-content;
+  margin: 10px 0;
 }
 
 .mat-input,
@@ -43,4 +44,19 @@
   width: 100%;
   gap: 20px;
   justify-content: center;
+}
+
+#loadImage {
+  width: 120px;
+}
+
+.mat-form-field:has(input[readonly]) {
+  opacity: 0.5;
+}
+
+.avatar {
+  width: 300px;
+  height: 200px;
+  margin: 10px 0;
+  object-fit: contain;
 }

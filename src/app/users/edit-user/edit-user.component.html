@@ -1,5 +1,7 @@
-<div *ngIf="formGroup" [formGroup]="formGroup" class="user-container">
+<div *ngIf="formGroup && user" [formGroup]="formGroup" class="user-container">
   <h1><strong>Edit User</strong></h1>
+
+  <img [src]="user.imagePreview" class="avatar" />
 
   <mat-form-field class="mat-input">
     <mat-label>Username</mat-label>
@@ -31,6 +33,36 @@
     <mat-label>Site</mat-label>
     <input matInput placeholder="Your Site" formControlName="site" />
   </mat-form-field>
+
+  <mat-form-field class="mat-input">
+    <mat-label>Image name</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="avatar"
+      formControlName="avatar"
+      readonly
+    />
+  </mat-form-field>
+
+  <button
+    mat-button
+    class="mat-button"
+    id="loadImage"
+    color="custom"
+    (click)="image.click()"
+  >
+    Load image
+  </button>
+
+  <input
+    type="file"
+    accept="image/*"
+    hidden
+    #image
+    (change)="onLoadImage($event)"
+  />
+
   <div class="btns-div">
     <button
       mat-button
