@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
           case Breakpoints.Large: {
             this.displayedColumns.push(
-              'wight',
+              'width',
               'height',
               'depth',
               'image',
@@ -59,17 +59,7 @@ export class ProductsComponent implements OnInit {
   length!: number;
   currentPageIndex: number = 0;
   currentPageSize: number = 5;
-  displayedColumns: string[] = [
-    'name',
-    'manufacturer',
-    'weight',
-    'height',
-    'depth',
-    'image',
-    'country_of_origin',
-    'editing',
-    'delete',
-  ];
+  displayedColumns!: string[];
   dataSource = new MatTableDataSource([] as IProduct[]);
 
   openDialog(product: IProduct): void {
