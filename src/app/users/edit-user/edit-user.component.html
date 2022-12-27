@@ -1,7 +1,7 @@
 <div *ngIf="formGroup && user" [formGroup]="formGroup" class="user-container">
   <h1><strong>Edit User</strong></h1>
 
-  <img [src]="user.imagePreview" class="avatar" />
+  <img *ngIf="user.imagePreview" [src]="user.imagePreview" class="avatar" />
 
   <mat-form-field class="mat-input">
     <mat-label>Username</mat-label>
