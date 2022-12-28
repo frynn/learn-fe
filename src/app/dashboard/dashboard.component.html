@@ -1,1 +1,19 @@
-<h1 aligan="center">Dashboard</h1>
+<div class="greeting">
+  <h1 *ngIf="profile">
+    <strong>{{ message }}, {{ profile.username }}</strong>
+  </h1>
+</div>
+<div class="tables">
+  <a routerLink="users">
+    <div class="block">
+      <mat-icon>person</mat-icon>
+      <span>To Users Table</span>
+    </div>
+  </a>
+  <a routerLink="products">
+    <div class="block">
+      <mat-icon>shopping_basket</mat-icon>
+      <span>To Products Table</span>
+    </div>
+  </a>
+</div>

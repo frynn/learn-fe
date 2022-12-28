@@ -1,0 +1,37 @@
+.greeting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.tables {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 75px;
+  border: 2px solid #d9d9d9;
+  border-radius: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+a:hover {
+  .block {
+    border: 2px solid #6c6b6b;
+  }
+}
