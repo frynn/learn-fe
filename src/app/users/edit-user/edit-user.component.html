@@ -50,7 +50,7 @@
     class="mat-button"
     id="loadImage"
     color="custom"
-    (click)="image.click()"
+    (click)="imageInput.click()"
   >
     Load image
   </button>
@@ -59,7 +59,7 @@
     type="file"
     accept="image/*"
     hidden
-    #image
+    #imageInput
     (change)="onLoadImage($event)"
   />
 
