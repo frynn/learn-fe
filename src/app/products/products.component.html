@@ -5,6 +5,8 @@
     [pageSizeOptions]="[5, 10, 20]"
     [length]="length"
     (page)="onPage($event)"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
   ></mat-paginator>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
@@ -74,6 +76,13 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="length"
+    (page)="onPage($event)"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+  ></mat-paginator>
 </div>
 <a mat-button class="mat-button" color="custom" routerLink="create-product">
   Create new product

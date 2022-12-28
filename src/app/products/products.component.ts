@@ -14,9 +14,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  destroyed = new Subject<void>();
-  currentScreenSize!: string;
-  displayNameMap = [Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large];
+  displayNameMap = [
+    Breakpoints.Small,
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge,
+  ];
 
   constructor(
     private readonly breakpointObserver: BreakpointObserver,
@@ -40,7 +43,17 @@ export class ProductsComponent implements OnInit {
             break;
           }
 
-          case Breakpoints.Large: {
+          case Breakpoints.Large || Breakpoints.XLarge: {
+            this.displayedColumns.push(
+              'width',
+              'height',
+              'depth',
+              'image',
+              'country_of_origin',
+            );
+            break;
+          }
+          default: {
             this.displayedColumns.push(
               'width',
               'height',
@@ -59,7 +72,19 @@ export class ProductsComponent implements OnInit {
   length!: number;
   currentPageIndex: number = 0;
   currentPageSize: number = 5;
-  displayedColumns!: string[];
+  pageSize: number = 5;
+  pageIndex!: number;
+  displayedColumns: string[] = [
+    'name',
+    'manufacturer',
+    'width',
+    'height',
+    'depth',
+    'image',
+    'country_of_origin',
+    'editing',
+    'delete',
+  ];
   dataSource = new MatTableDataSource([] as IProduct[]);
 
   openDialog(product: IProduct): void {
@@ -120,5 +145,7 @@ export class ProductsComponent implements OnInit {
     this.getProducts(event.pageIndex, event.pageSize);
     this.currentPageIndex = event.pageIndex;
     this.currentPageSize = event.pageSize;
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
   }
 }
