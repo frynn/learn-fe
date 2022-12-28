@@ -43,16 +43,8 @@ export class ProductsComponent implements OnInit {
             break;
           }
 
-          case Breakpoints.Large || Breakpoints.XLarge: {
-            this.displayedColumns.push(
-              'width',
-              'height',
-              'depth',
-              'image',
-              'country_of_origin',
-            );
-            break;
-          }
+          case Breakpoints.Large:
+          case Breakpoints.XLarge:
           default: {
             this.displayedColumns.push(
               'width',
