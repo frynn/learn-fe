@@ -3,8 +3,9 @@
   color: black;
 }
 
-.wrapper-user h3 {
-  float: left;
+.wrapper-user {
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -31,6 +32,5 @@ body {
 }
 
 .sizeTable {
-  width: 70%;
   height: 100%;
 }

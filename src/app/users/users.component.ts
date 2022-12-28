@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ImagesService } from '../shared/services/images.service';
-import { map, mergeAll, mergeMap, of, toArray } from 'rxjs';
+import { map, mergeAll, mergeMap, of, toArray, Subject } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-users',
@@ -14,22 +15,45 @@ import { map, mergeAll, mergeMap, of, toArray } from 'rxjs';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  displayNameMap = [
+    Breakpoints.Small,
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge,
+  ];
+  displayedColumns: string[] = [];
+
   constructor(
+    private readonly breakpointObserver: BreakpointObserver,
     private readonly UsersService: UsersService,
     private readonly imagesService: ImagesService,
     private dialog: MatDialog,
-  ) {}
+  ) {
+    this.breakpointObserver.observe(this.displayNameMap).subscribe((result) => {
+      this.displayedColumns = ['Username', 'Site'];
+      for (const bp of this.displayNameMap) {
+        if (!result.breakpoints[bp]) continue;
+        switch (bp) {
+          case Breakpoints.Small: {
+            this.displayedColumns.push('imagePreview');
+            break;
+          }
 
-  displayedColumns: string[] = [
-    'UserId',
-    'Username',
-    'imagePreview',
-    'Email',
-    'Phone',
-    'Site',
-    'Edit',
-    'management',
-  ];
+          case Breakpoints.Medium: {
+            this.displayedColumns.push('imagePreview', 'Phone');
+            break;
+          }
+
+          case Breakpoints.Large || Breakpoints.XLarge:
+          default: {
+            this.displayedColumns.push('imagePreview', 'Phone', 'Email');
+            break;
+          }
+        }
+      }
+      this.displayedColumns.push('Edit', 'management');
+    });
+  }
 
   dataSource = new MatTableDataSource([] as IUser[]);
   length!: number;
