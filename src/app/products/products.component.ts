@@ -1,38 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IProduct } from '../shared/interfaces/product.interface';
 import { ProductsService } from '../shared/services/products.service';
 import { ImagesService } from '../shared/services/images.service';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { map, mergeAll, mergeMap, of, toArray, Subject } from 'rxjs';
+import { map, mergeAll, mergeMap, of, toArray, Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Breakpoints } from '@angular/cdk/layout';
+import { LayoutService } from '../shared/services/layout.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
-  displayNameMap = [
-    Breakpoints.Small,
-    Breakpoints.Medium,
-    Breakpoints.Large,
-    Breakpoints.XLarge,
-  ];
+export class ProductsComponent implements OnInit, OnDestroy {
+  length!: number;
+  currentPageIndex: number = 0;
+  currentPageSize: number = 5;
+  pageSize: number = 5;
+  pageIndex!: number;
+  displayedColumns: string[] = [];
+  sub$ = new Subscription();
+  dataSource = new MatTableDataSource([] as IProduct[]);
 
   constructor(
-    private readonly breakpointObserver: BreakpointObserver,
+    private readonly layoutService: LayoutService,
     private readonly productsService: ProductsService,
     private readonly imagesService: ImagesService,
     private dialog: MatDialog,
   ) {
-    this.breakpointObserver.observe(this.displayNameMap).subscribe((result) => {
-      this.displayedColumns = ['name', 'manufacturer'];
-      for (const bp of this.displayNameMap) {
-        if (!result.breakpoints[bp]) continue;
-
+    this.sub$.add(
+      this.layoutService.observe$.subscribe((bp) => {
+        this.displayedColumns = ['name', 'manufacturer'];
         switch (bp) {
+          case Breakpoints.XSmall: {
+            break;
+          }
+
           case Breakpoints.Small: {
             this.displayedColumns.push('image');
             break;
@@ -43,8 +48,6 @@ export class ProductsComponent implements OnInit {
             break;
           }
 
-          case Breakpoints.Large:
-          case Breakpoints.XLarge:
           default: {
             this.displayedColumns.push(
               'width',
@@ -56,28 +59,14 @@ export class ProductsComponent implements OnInit {
             break;
           }
         }
-      }
-
-      this.displayedColumns.push('editing', 'delete');
-    });
+        this.displayedColumns.push('editing', 'delete');
+      }),
+    );
   }
-  length!: number;
-  currentPageIndex: number = 0;
-  currentPageSize: number = 5;
-  pageSize: number = 5;
-  pageIndex!: number;
-  displayedColumns: string[] = [
-    'name',
-    'manufacturer',
-    'width',
-    'height',
-    'depth',
-    'image',
-    'country_of_origin',
-    'editing',
-    'delete',
-  ];
-  dataSource = new MatTableDataSource([] as IProduct[]);
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
+  }
 
   openDialog(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
