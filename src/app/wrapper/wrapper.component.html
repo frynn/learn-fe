@@ -47,8 +47,8 @@
   <div class="bodyForContent">
     <mat-card
       class="sizeTable"
+      [ngClass]="{ 'full-width': fullWidth }"
       id="bodyForContent"
-      [ngStyle]="{ width: contentSize }"
     >
       <mat-card-actions>
         <router-outlet></router-outlet>

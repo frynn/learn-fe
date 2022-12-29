@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from '../shared/services/users.service';
 import { IUser } from '../shared/interfaces';
 import { ConfirmationDialogComponent } from '../shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -6,34 +6,38 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ImagesService } from '../shared/services/images.service';
-import { map, mergeAll, mergeMap, of, toArray, Subject } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, mergeAll, mergeMap, of, Subscription, toArray } from 'rxjs';
+import { Breakpoints } from '@angular/cdk/layout';
+import { LayoutService } from '../shared/services/layout.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent implements OnInit {
-  displayNameMap = [
-    Breakpoints.Small,
-    Breakpoints.Medium,
-    Breakpoints.Large,
-    Breakpoints.XLarge,
-  ];
+export class UsersComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [];
+  sub$ = new Subscription();
+  dataSource = new MatTableDataSource([] as IUser[]);
+  length!: number;
+  currentPageIndex: number = 0;
+  currentPageSize: number = 5;
 
   constructor(
-    private readonly breakpointObserver: BreakpointObserver,
+    private readonly layoutService: LayoutService,
     private readonly UsersService: UsersService,
     private readonly imagesService: ImagesService,
     private dialog: MatDialog,
   ) {
-    this.breakpointObserver.observe(this.displayNameMap).subscribe((result) => {
-      this.displayedColumns = ['Username', 'Site'];
-      for (const bp of this.displayNameMap) {
-        if (!result.breakpoints[bp]) continue;
+    this.sub$.add(
+      this.layoutService.observe$.subscribe((bp) => {
+        this.displayedColumns = ['Username', 'Site'];
+
         switch (bp) {
+          case Breakpoints.XSmall: {
+            break;
+          }
+
           case Breakpoints.Small: {
             this.displayedColumns.push('imagePreview');
             break;
@@ -44,21 +48,19 @@ export class UsersComponent implements OnInit {
             break;
           }
 
-          case Breakpoints.Large || Breakpoints.XLarge:
           default: {
             this.displayedColumns.push('imagePreview', 'Phone', 'Email');
             break;
           }
         }
-      }
-      this.displayedColumns.push('Edit', 'management');
-    });
+        this.displayedColumns.push('Edit', 'management');
+      }),
+    );
   }
 
-  dataSource = new MatTableDataSource([] as IUser[]);
-  length!: number;
-  currentPageIndex: number = 0;
-  currentPageSize: number = 5;
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
+  }
 
   openDialog(user: IUser): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {

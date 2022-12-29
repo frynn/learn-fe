@@ -33,4 +33,9 @@ body {
 
 .sizeTable {
   height: 100%;
+  width: 70%;
+
+  &.full-width {
+    width: 100%;
+  }
 }
