@@ -3,10 +3,10 @@ import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { randomBoolean, randomString } from '@unit-tests';
+import { randomBoolean } from '@unit-tests';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 
 describe('LoginComponent', () => {
@@ -19,8 +19,8 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule, ReactiveFormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         FormBuilder,
         { provide: AuthService, useValue: mockAuthService },
