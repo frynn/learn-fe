@@ -10,10 +10,10 @@ import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { randomNumber } from '@unit-tests';
+import { randomNumber, randomString } from '@unit-tests';
 import { ProductsService } from '../shared/services/products.service';
 
-describe('ProductstableComponent', () => {
+fdescribe('ProductstableComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
   const mockLayoutService = {
@@ -23,7 +23,7 @@ describe('ProductstableComponent', () => {
     deleteProduct: jasmine.createSpy().and.returnValue(of()),
     getProducts: jasmine.createSpy().and.returnValue(of()),
   };
-  let id: string = 'dfgh';
+  let id = 'bn';
   let event: PageEvent = {
     pageIndex: randomNumber(),
     pageSize: randomNumber(),
@@ -51,7 +51,7 @@ describe('ProductstableComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('`onPage` should passing values to  currentPageIndex, this.currentPageSize, pageSize, pageIndex and call getProducts', () => {
+  it('`onPage` should store currentPageIndex and currentPageSize, should call getProducts', () => {
     const spy = spyOn(component, 'getProducts');
     component.onPage(event);
     expect(spy).toHaveBeenCalled();
@@ -69,8 +69,8 @@ describe('ProductstableComponent', () => {
       );
       getTestScheduler().run(() => {
         component.deleteProduct(id);
-        expect(spy).toHaveBeenCalled();
       });
+      expect(spy).toHaveBeenCalled();
     });
 
     it('should console.error in case of error', () => {
