@@ -12,8 +12,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { randomNumber, randomString } from '@unit-tests';
 import { ProductsService } from '../shared/services/products.service';
+import { MatTableModule } from '@angular/material/table';
 
-fdescribe('ProductstableComponent', () => {
+describe('ProductstableComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
   const mockLayoutService = {
@@ -32,8 +33,13 @@ fdescribe('ProductstableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductsComponent],
-      imports: [RouterTestingModule, HttpClientModule, MatDialogModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatTableModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         { provide: LayoutService, useValue: mockLayoutService },
         { provide: ProductsService, useValue: mockProductsService },
